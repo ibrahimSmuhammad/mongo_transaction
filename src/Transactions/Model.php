@@ -3,7 +3,7 @@
 namespace Hema\MongoTransaction\Transactions;
 
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use Hema\MongoTransaction\Builder as QueryBuilder;
+use Hema\MongoTransaction\Transactions\Builder as QueryBuilder;
 
 class Model extends Eloquent
 {
