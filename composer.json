@@ -1,0 +1,20 @@
+{
+    "name": "hema/mongo_transaction",
+    "description": "adding transaction feature to jenssegers/mongodb",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ibrahimSmuhammad",
+            "email": "ibrahim.samir@edigits.net"
+        }
+    ],
+    "autoload": {
+    "psr-4": {
+          "Hema\\MongoTransaction\\": "packages/hema/mongo_transaction/src"
+      }
+    },
+  "require": {
+      "jenssegers/mongodb": "^3.1"
+  }
+
+}
