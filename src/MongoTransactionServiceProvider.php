@@ -13,7 +13,7 @@ class MongoTransactionServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        include __DIR__.'/routes.php';
+        //
     }
 
     /**
@@ -24,5 +24,6 @@ class MongoTransactionServiceProvider extends ServiceProvider
     public function register()
     {
          $this->app->make('Hema\MongoTransaction\Builder');
+         $this->app->make('Hema\MongoTransaction\Model');
     }
 }
