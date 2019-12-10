@@ -23,7 +23,7 @@ class MongoTransactionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-         $this->app->make('Hema\Transactions\Builder');
-         $this->app->make('Hema\Transactions\Model');
+         $this->app->make('Hema\MongoTransaction\Transactions\Builder');
+         $this->app->make('Hema\MongoTransaction\Transactions\Model');
     }
 }

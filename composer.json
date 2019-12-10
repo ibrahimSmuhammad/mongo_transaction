@@ -10,7 +10,7 @@
     ],
     "autoload": {
     "psr-4": {
-          "Hema\\Transaction\\": "src/Transactions/"
+          "Hema\\Mongo\\": "src/"
       }
     },
   "require": {

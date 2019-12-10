@@ -1,6 +1,6 @@
 <?php
 
-namespace Hema\Transactions;
+namespace Hema\MongoTransaction\Transactions;
 
 use Jenssegers\Mongodb\Query\Builder as BaseBuilder;
 
