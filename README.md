@@ -48,17 +48,17 @@ use use Jenssegers\Mongodb\Eloquent\Model
 
 ```php
 
-  Post::startTransaction();
+    User::startTransaction();
   try {
           User::insert($some_data);
 
           Profile::insert($some_data);
 
-          User::commitTransaction();
-          return 'done';
+        User::commitTransaction();
+        return 'done';
 
    } catch (\Exception $e) {
-          User::rollbackTransaction();
+        User::rollbackTransaction();
           return $e->getMessage();
    }
 
