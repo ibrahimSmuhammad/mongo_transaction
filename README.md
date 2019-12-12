@@ -58,7 +58,7 @@ use use Jenssegers\Mongodb\Eloquent\Model
           return 'done';
 
    } catch (\Exception $e) {
-          Post::rollbackTransaction();
+          User::rollbackTransaction();
           return $e->getMessage();
    }
 
