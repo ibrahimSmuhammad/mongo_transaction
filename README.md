@@ -4,8 +4,17 @@
 Assuming you have already installed ```composer require jenssegers/mongodb``` and configured it fully according to the documentation (https://packagist.org/packages/jenssegers/mongodb), now run this to install mongo-transactions:
 
 ```composer require hema/mongo_transaction```
+### Extend The Flowing Model :
+```php
+use Hema\MongoTransaction\Transactions\Model
+```
 
-### now you can use transaction this way : 
+### Instead of Jenssegers Model
+```php
+use use Jenssegers\Mongodb\Eloquent\Model 
+```
+
+#### now you can use transaction this way : 
 
 ```php
 * Model::startTransaction();
@@ -23,7 +32,7 @@ Assuming you have already installed ```composer require jenssegers/mongodb``` an
 
 
 ```
-Now You Can Use These Methods with transaction
+### Now You Can Use These Methods with transaction
 
 ```php
 * insert();
@@ -31,3 +40,8 @@ Now You Can Use These Methods with transaction
 * delete();
 * increment();
 * decrement();
+
+
+```
+
+### And Another Methods Will be Added in next releases.
