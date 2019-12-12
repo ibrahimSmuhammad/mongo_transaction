@@ -50,11 +50,11 @@ use use Jenssegers\Mongodb\Eloquent\Model
 
   Post::startTransaction();
   try {
-          Post::insert($some_data);
+          User::insert($some_data);
 
-          Comment::insert($some_data);
+          Profile::insert($some_data);
 
-          Post::commitTransaction();
+          User::commitTransaction();
           return 'done';
 
    } catch (\Exception $e) {
