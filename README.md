@@ -1,6 +1,6 @@
-###### mongo_transaction
+### Laravel Mongo Transaction
 
-##### Install
+##### How to Install:
 Assuming you have already installed ```composer require jenssegers/mongodb``` and configured it fully according to the documentation (https://packagist.org/packages/jenssegers/mongodb), now run this to install mongo-transactions:
 
 ```composer require hema/mongo_transaction```
@@ -12,6 +12,17 @@ use Hema\MongoTransaction\Transactions\Model
 ### Instead of Jenssegers Model
 ```php
 use use Jenssegers\Mongodb\Eloquent\Model 
+```
+
+### Note : 
+you've to enable replica set in [Mongo](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/#procedure "Replica Set In Mongod").
+```php
+~$ sudo mongod --replSet "rs0" 
+```
+
+and then run mongo
+```php
+~$ sudo mongo 
 ```
 
 #### now you can use transaction this way : 
@@ -48,19 +59,20 @@ use use Jenssegers\Mongodb\Eloquent\Model
 
 ```php
 
-  Post::startTransaction();
+    User::startTransaction();
   try {
-          Post::insert($some_data);
+          User::insert($some_data);
 
-          Comment::insert($some_data);
+          Profile::insert($some_data);
 
-          Post::commitTransaction();
-          return 'done';
+        User::commitTransaction();
+        return 'done';
 
    } catch (\Exception $e) {
-          Post::rollbackTransaction();
+        User::rollbackTransaction();
           return $e->getMessage();
    }
 
 ```
+
 ### And Another Methods Will be Added in next releases.
