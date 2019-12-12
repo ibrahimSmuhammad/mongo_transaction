@@ -44,4 +44,23 @@ use use Jenssegers\Mongodb\Eloquent\Model
 
 ```
 
+#### Example : 
+
+```php
+
+  Post::startTransaction();
+  try {
+          Post::insert($some_data);
+
+          Comment::insert($some_data);
+
+          Post::commitTransaction();
+          return 'done';
+
+   } catch (\Exception $e) {
+          Post::rollbackTransaction();
+          return $e->getMessage();
+   }
+
+```
 ### And Another Methods Will be Added in next releases.
