@@ -46,6 +46,23 @@ class Builder extends BaseBuilder
       }
 
     /**
+     * Update a record in the database.
+     *
+     * @param  array  $values
+     * @param  array  $options
+     * @return int
+     */
+      public function update(array $values, array $options = [])
+      {
+          // Use $set as default operator.
+          if (! starts_with(key($values), '$')) {
+              $values = ['$set' => $values];
+          }
+
+          return $this->performUpdate($values, $options);
+      }
+
+    /**
      * Delete a record from the database.
      *
      * @param  mixed  $id
