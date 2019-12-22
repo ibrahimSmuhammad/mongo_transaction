@@ -28,16 +28,16 @@ and then run mongo
 #### now you can use transaction this way : 
 
 ```php
-* Model::startTransaction();
+* Transaction::start();
 
 // ........ A bunch of other db operations
 
-* Model::commitTransaction();
+* Transaction::commit();
 
 // ........ commit when success
 
 
-* Model::rollbackTransaction();
+* Transaction::rollback();
 
 // ........ Or rollback when error occure
 
