@@ -59,17 +59,17 @@ and then run mongo
 
 ```php
 
-    User::startTransaction();
+    Transaction::start();
   try {
           User::insert($some_data);
 
           Profile::insert($some_data);
 
-        User::commitTransaction();
+        Transaction::commit();
         return 'done';
 
    } catch (\Exception $e) {
-        User::rollbackTransaction();
+        Transaction::rollback();
           return $e->getMessage();
    }
 
