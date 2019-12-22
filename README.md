@@ -28,6 +28,12 @@ and then run mongo
 #### now you can use transaction this way : 
 
 ```php
+use Hema\MongoTransaction\Transactions\Transaction
+
+```
+
+
+```php
 * Transaction::start();
 
 // ........ A bunch of other db operations
