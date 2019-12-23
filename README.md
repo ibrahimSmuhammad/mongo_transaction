@@ -4,7 +4,7 @@
 Assuming you have already installed ```composer require jenssegers/mongodb``` and configured it fully according to the documentation (https://packagist.org/packages/jenssegers/mongodb), now run this to install mongo-transactions:
 
 ```composer require hema/mongo_transaction```
-### Use The Flowing Model :
+### In your Model Or BaseModel Use The Flowing Model :
 ```php
 use Hema\MongoTransaction\Transactions\Model
 ```
