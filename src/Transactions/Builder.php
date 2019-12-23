@@ -169,7 +169,8 @@ class Builder extends BaseBuilder
      * @return void
      */
     public static function startTransaction(){
-        $mongoClient = DB::connection('tuv_abudhabi_new')->getMongoClient();
+        $branch = config('database.default');
+        $mongoClient = DB::connection($branch)->getMongoClient();
         self::$session = $mongoClient->startSession();
         return self::$session->startTransaction();
     }
