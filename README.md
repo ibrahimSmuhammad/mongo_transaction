@@ -54,9 +54,12 @@ use Hema\MongoTransaction\Transactions\Transaction
 ```php
 * insert();
 * update();
-* delete();
+* delete(); //  = trash if soft delete enabled
+* forceDelete(); 
+* restore()
 * increment();
 * decrement();
+
 
 
 ```
