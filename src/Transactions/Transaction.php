@@ -1,17 +1,20 @@
 <?php
 
 namespace Hema\MongoTransaction\Transactions;
-use Hema\MongoTransaction\Transactions\Builder;
+use DB;
 
-class Transaction extends Builder
+class Transaction
 {
-
+    public static $session;
     /**
      * Start transaction.
      * @return void
      */
     public static function start(){
-        return self::startTransaction();
+        $branch = config('database.default');
+        $mongoClient = DB::connection($branch)->getMongoClient();
+        self::$session = $mongoClient->startSession();
+        return self::$session->startTransaction();
     }
 
     /**
@@ -19,7 +22,7 @@ class Transaction extends Builder
      * @return void
      */
     public static function commit(){
-        return self::commitTransaction();
+        return self::$session->commitTransaction();
     }
 
     /**
@@ -27,7 +30,6 @@ class Transaction extends Builder
      * @return void
      */
     public static function rollback(){
-        return self::rollbackTransaction();
+        return self::$session->abortTransaction();
     }
-
 }
