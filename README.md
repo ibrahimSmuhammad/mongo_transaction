@@ -15,8 +15,9 @@ use use Jenssegers\Mongodb\Eloquent\Model
 ```
 
 ### Note : 
-## this package created for specific business needs. so, it's may not fit your needs 100%. but you still can fork it and extend or modify it.
-## you've to enable replica set in [Mongo](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/#procedure "Replica Set In Mongod").
+* this package created for specific business needs. so, it's may not fit your needs 100%. but you still can fork it and extend or modify it.
+
+* you've to enable replica set in [Mongo](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/#procedure "Replica Set In Mongod").
 ```php
 ~$ sudo mongod --replSet "rs0" 
 ```
