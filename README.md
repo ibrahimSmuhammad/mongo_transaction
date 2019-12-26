@@ -15,7 +15,8 @@ use use Jenssegers\Mongodb\Eloquent\Model
 ```
 
 ### Note : 
-you've to enable replica set in [Mongo](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/#procedure "Replica Set In Mongod").
+## this package created for specific business needs. so, it's may not fit your needs 100%. but you still can fork it and extend or modify it.
+## you've to enable replica set in [Mongo](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/#procedure "Replica Set In Mongod").
 ```php
 ~$ sudo mongod --replSet "rs0" 
 ```
@@ -52,14 +53,17 @@ use Hema\MongoTransaction\Transactions\Transaction
 ### Now You Can Use These Methods with transaction
 
 ```php
+* create();
 * insert();
 * update();
-* delete(); //  = trash if soft delete enabled
+* delete();
 * forceDelete(); 
 * restore()
 * increment();
 * decrement();
 
+* trash(); //custome method for soft-delete
+* remove(); //custome method for hard-delete
 
 
 ```
@@ -69,17 +73,21 @@ use Hema\MongoTransaction\Transactions\Transaction
 ```php
 
     Transaction::start();
-  try {
-          User::insert($some_data);
 
-          Profile::insert($some_data);
+  try {
+ 	User::insert($some_data);
+
+  	Profile::insert($some_data);
 
         Transaction::commit();
+
         return 'done';
 
    } catch (\Exception $e) {
+
         Transaction::rollback();
-          return $e->getMessage();
+
+  	return $e->getMessage();
    }
 
 ```

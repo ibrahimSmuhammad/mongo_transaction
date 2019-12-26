@@ -2,13 +2,50 @@
 
 use Hema\MongoTransaction\Transactions\Transaction;
 use Hema\MongoTransaction\Transactions\Query\Builder as QueryBuilder;
+use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Builder as EloquentBuilder;
 
 class Builder extends EloquentBuilder
 {
     /**
-     * trash a record in the database (soft delete).
+     * Insert a new record into the database.
      *
+     * @param array $values
+     * @return bool
+     */
+    public function insert(array $values)
+    {
+        // Since every insert gets treated like a batch insert, we will have to detect
+        // if the user is inserting a single document or an array of documents.
+        $session = Transaction::$session;
+        $batch = true;
+
+        foreach ($values as $value) {
+            // As soon as we find a value that is not an array we assume the user is
+            // inserting a single document.
+            if (!is_array($value)) {
+                $batch = false;
+                break;
+            }
+        }
+
+        if (!$batch) {
+            $values = [$values];
+        }
+        // Batch insert
+        // check if transaction session Started or Not
+        if ($session) {
+            $result = $this->toBase()->collection->insertMany($values, ['session' => $session]);
+            return (1 == (int)$result->isAcknowledged());
+        }
+
+        $result = $this->toBase()->collection->insertMany($values);
+        return (1 == (int)$result->isAcknowledged());
+    }
+
+    /**
+     * trash a record in the database (soft delete).
+     * soft delete
      * @return mixed
      */
     public function delete()
@@ -105,5 +142,4 @@ class Builder extends EloquentBuilder
 
         return 0;
     }
-
 }
