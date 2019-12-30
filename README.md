@@ -6,7 +6,7 @@ Assuming you have already installed ```composer require jenssegers/mongodb``` an
 ```composer require hema/mongo_transaction```
 ### In your Model Or BaseModel Use The Flowing Model :
 ```php
-use Hema\MongoTransaction\Transactions\Model
+use Hema\MongoTransaction\Transactions\Eloquent\Model
 ```
 
 ### Instead of Jenssegers Model
