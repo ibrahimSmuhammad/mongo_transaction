@@ -385,5 +385,4 @@ class Builder extends BaseBuilder
     {
         return $where['sql'];
     }
-
 }

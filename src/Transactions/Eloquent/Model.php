@@ -138,11 +138,16 @@ abstract class Model extends Eloquent
         // the query builder, which will give us back the final inserted ID for this
         // table from the database. Not all tables have to be incrementing though.
         $attributes = $this->attributes;
+        if ($this->getIncrementing()) {
+            $this->insertAndSetId($query, $attributes);
+        }
         // If the table isn't incrementing we'll simply insert these attributes as they
         // are. These attribute arrays must contain an "id" column previously placed
         // there by the developer as the manually determined key for these models.
 //        dd($attributes);
+        else {
             $query->insert($attributes);
+        }
         // We will go ahead and set the exists property to true, so that it is set when
         // the created event is fired, just in case the developer tries to update it
         // during the event. This will allow them to do so and run an update here.
@@ -153,6 +158,19 @@ abstract class Model extends Eloquent
         $this->fireModelEvent('created', false);
 
         return true;
+    }
+
+    /**
+     * Insert the given attributes and set the ID on the model.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  array  $attributes
+     * @return void
+     */
+    protected function insertAndSetId(\Illuminate\Database\Eloquent\Builder $query, $attributes)
+    {
+        $id = $query->insertGetId($attributes, $keyName = $this->getKeyName());
+        $this->setAttribute($keyName, $id);
     }
 
 }

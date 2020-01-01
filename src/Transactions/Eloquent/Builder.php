@@ -142,4 +142,49 @@ class Builder extends EloquentBuilder
 
         return 0;
     }
+
+    /**
+     * Insert a new record and get the value of the primary key.
+     *
+     * @param  array   $values
+     * @param  string  $sequence
+     * @return int
+     */
+    public function insertGetId(array $values, $sequence = null)
+    {
+        // Since every insert gets treated like a batch insert, we will have to detect
+        // if the user is inserting a single document or an array of documents.
+        $session = Transaction::$session;
+        $batch = true;
+
+        foreach ($values as $value) {
+            // As soon as we find a value that is not an array we assume the user is
+            // inserting a single document.
+            if (!is_array($value)) {
+                $batch = false;
+                break;
+            }
+        }
+
+        if (!$batch) {
+            $values = [$values];
+        }
+        // Batch insert
+        // check if transaction session Started or Not
+        if ($session) {
+            $result = $this->toBase()->collection->insertOne($values, ['session' => $session]);
+        }else {
+            $result = $this->toBase()->collection->insertOne($values);
+        }
+        if (1 == (int) $result->isAcknowledged()) {
+            if (is_null($sequence)) {
+                $sequence = '_id';
+            }
+
+            // Return id
+            return $sequence == '_id' ? $result->getInsertedId() : $values[$sequence];
+        }
+    }
+
+
 }
