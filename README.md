@@ -92,5 +92,3 @@ use Hema\MongoTransaction\Transactions\Transaction
    }
 
 ```
-
-### And Another Methods Will be Added in next releases.
