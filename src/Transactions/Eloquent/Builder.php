@@ -29,7 +29,7 @@ class Builder extends EloquentBuilder
             }
         }
 
-        if (!$batch) {
+        if ($batch !== false) {
             $values = [$values];
         }
         // Batch insert
@@ -166,9 +166,10 @@ class Builder extends EloquentBuilder
             }
         }
 
-        if (!$batch) {
+        if ($batch !== false) {
             $values = [$values];
         }
+
         // Batch insert
         // check if transaction session Started or Not
         if ($session) {

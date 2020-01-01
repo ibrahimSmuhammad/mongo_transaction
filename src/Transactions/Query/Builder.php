@@ -32,7 +32,7 @@ class Builder extends BaseBuilder
             }
         }
 
-        if (!$batch) {
+        if ($batch !== false) {
             $values = [$values];
         }
         // Batch insert
