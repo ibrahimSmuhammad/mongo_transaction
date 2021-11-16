@@ -56,7 +56,7 @@ class Builder extends BaseBuilder
     public function update(array $values, array $options = [])
     {
         // Use $set as default operator.
-        if (!starts_with(key($values), '$')) {
+        if (!str_starts_with(key($values), '$')) {
             $values = ['$set' => $values];
         }
 
@@ -277,7 +277,7 @@ class Builder extends BaseBuilder
             $regex = preg_replace('#(^|[^\\\])%#', '$1.*', preg_quote($value));
 
             // Convert like to regular expression.
-            if (! starts_with($value, '%')) {
+            if (! str_starts_with($value, '%')) {
                 $regex = '^' . $regex;
             }
             if (! ends_with($value, '%')) {
@@ -299,7 +299,7 @@ class Builder extends BaseBuilder
 
             // For inverse regexp operations, we can just use the $not operator
             // and pass it a Regex instence.
-            if (starts_with($operator, 'not')) {
+            if (str_starts_with($operator, 'not')) {
                 $operator = 'not';
             }
         }
